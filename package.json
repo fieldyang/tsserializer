@@ -1,0 +1,26 @@
+{
+  "name": "serializer",
+  "version": "0.0.1",
+  "description": "node serializer(typescript)",
+  "main": "dist/serializer.js",
+  "types": "dist/types/serializer.d.ts",
+  "files": [
+    "dist/*.js",
+    "dist/types/*.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fieldyang/serializer.git"
+  },
+  "keywords": [
+    "node",
+    "serializer",
+    "typescript"
+  ],
+  "author": "fieldyang <fieldyang@163.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/noomijs/noomi/issues"
+  },
+  "homepage": "https://github.com/noomijs/noomi#readme"
+}
