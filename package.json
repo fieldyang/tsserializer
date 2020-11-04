@@ -1,7 +1,7 @@
 {
-  "name": "serializer",
+  "name": "tsserializer",
   "version": "0.0.1",
-  "description": "node serializer(typescript)",
+  "description": "node serializer",
   "main": "dist/serializer.js",
   "types": "dist/types/serializer.d.ts",
   "files": [
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fieldyang/serializer.git"
+    "url": "git+https://github.com/fieldyang/tsserializer.git"
   },
   "keywords": [
     "node",
@@ -20,7 +20,7 @@
   "author": "fieldyang <fieldyang@163.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/noomijs/noomi/issues"
+    "url": "https://github.com/fieldyang/tsserializer/issues"
   },
-  "homepage": "https://github.com/noomijs/noomi#readme"
+  "homepage": "https://github.com/fieldyang/tsserializer#readme"
 }

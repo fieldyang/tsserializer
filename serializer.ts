@@ -1,4 +1,4 @@
-export default class Serializer{
+class Serializer{
     /**
      * 序列化索引号，用于生成序列id
      */
@@ -24,17 +24,16 @@ export default class Serializer{
         //序列化map
         let serMap:Map<string,string> = new Map();
         handleOne(instance,tmpMap,serMap);
-        let retObj = {};
-        let keys:string[] = [];
-        //倒序
-        for(let key of serMap.keys()){
-            keys.unshift(key);
+        let rObj = {};
+        let key:string;
+        for(key of serMap.keys()){
+            rObj[key] = serMap.get(key);
         }
-        for(let k of keys){
-            retObj[k] = serMap.get(k);
-        }
-        
-        return JSON.stringify(retObj);
+
+        return JSON.stringify({
+            root:key,
+            serObj:rObj
+        });
         
         /**
          * 处理一个对象
@@ -77,10 +76,10 @@ export default class Serializer{
      */
     public static deserialize(instanceStr:string):any{
         const me = this;
-        let gobj = JSON.parse(instanceStr);
+        let wholeObj = JSON.parse(instanceStr);
+        let gobj = wholeObj.serObj;
         handleOne(gobj); 
-        let keys = Object.getOwnPropertyNames(gobj);
-        return gobj[keys[0]];
+        return gobj[wholeObj.root];
         function handleOne(obj:any):any{
             if(typeof obj !== 'object'){
                 return;
@@ -104,7 +103,7 @@ export default class Serializer{
                     let cls = me.getModuleClass(cName);
                     //给对象绑定类原型
                     if(cls){
-                        obj.__proto__ = cls.prototype;
+                        obj[key].__proto__ = cls.prototype;
                     }
                 }
             });
@@ -125,10 +124,25 @@ export default class Serializer{
      * @param className     类名
      */
     private static getModuleClass(className:string):any{
-        for(let c of require.main.children){
-            if(c.exports.default.name === className){
-                return c.exports.default;
+        let keys = Object.getOwnPropertyNames(require.cache);
+
+        for(let k of keys){
+            let exp = require.cache[k].exports;
+            //模块有默认export 类
+            if(exp.default){
+                if(exp.default.name === className){
+                    return exp.default;
+                }
+            }else{
+                //没有default export，则读取多个export对象进行比较
+                let keys1 = Object.getOwnPropertyNames(exp);
+                for(let k1 of keys1){
+                    if(typeof exp[k1] === 'function' && exp[k1].name === className){
+                        return exp[k1];
+                    }
+                }
             }
         }
     }
 }
+export {Serializer}
