@@ -1,7 +1,7 @@
 {
-  "name": "tsserializer",
+  "name": "serializer-node",
   "version": "0.0.1",
-  "description": "node serializer",
+  "description": "serialize or deserialize js instance object in nodejs,support ts and js",
   "main": "dist/serializer.js",
   "types": "dist/types/serializer.d.ts",
   "files": [
@@ -15,7 +15,8 @@
   "keywords": [
     "node",
     "serializer",
-    "typescript"
+    "typescript",
+    "javascript"
   ],
   "author": "fieldyang <fieldyang@163.com>",
   "license": "MIT",
